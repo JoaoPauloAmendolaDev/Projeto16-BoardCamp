@@ -18,16 +18,16 @@
     "colId": "history",
     "containerId": "",
     "name": "localhost:4000/categories",
-    "url": "localhost:4000/games",
-    "method": "GET",
+    "url": "localhost:4000/rentals",
+    "method": "POST",
     "sortNum": 0,
     "created": "2022-12-07T18:44:16.360Z",
-    "modified": "2022-12-08T02:31:32.998Z",
+    "modified": "2022-12-08T05:09:20.031Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\" : \"jogo de google\",\n  \"image\" : \"https://files.tecnoblog.net/wp-content/uploads/2021/09/logotipo_da_empresa_google.jpg\",\n  \"stockTotal\" :2,\n  \"categoryId\" : 10,\n  \"pricePerDay\" : 3000\n}",
+      "raw": "{\n  \"customerId\" : 2,\n  \"gameId\" : 3,\n  \"daysRented\" : 3\n}",
       "form": []
     },
     "tests": []

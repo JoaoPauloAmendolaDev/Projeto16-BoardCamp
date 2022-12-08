@@ -16,7 +16,7 @@ async function categoriesPostController(req, res) {
 
   try {
     const sucess = await connection.query(
-      "INSERT INTO categories (name) VALUES ($1) ",
+      "INSERT INTO categories (name) VALUES ($1)",
       [name]
     );
     console.log(sucess);

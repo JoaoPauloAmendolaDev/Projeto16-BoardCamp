@@ -20,7 +20,7 @@ async function gamePostMiddleware(req, res, next) {
       [name]
     );
 
-    if (categoryIdExist.rows.length === 0) {
+    if (!categoryIdExist.rowCount) {
       return res.status(400).send("The indicated category does not exist");
     }
 
@@ -32,7 +32,7 @@ async function gamePostMiddleware(req, res, next) {
 
     next();
   } catch (error) {
-    console.log('deu ruim', error)
+    console.log("deu ruim", error);
     res.status(500).send(error);
   }
 }
