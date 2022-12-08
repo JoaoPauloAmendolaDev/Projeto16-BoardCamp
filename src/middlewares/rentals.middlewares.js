@@ -41,6 +41,26 @@ async function rentalsPostMiddleware(req, res, next) {
 async function rentalsPostFinalMiddleware(req, res) {
   const { customerId, gameId, daysRented, originalPrice } = res.locals.data;
   console.log(res.locals.data);
+
+  try {
+    const isAvaibleGame = await connection.query(
+      "SELECT * FROM games WHERE id = $1;",
+      [gameId]
+    );
+    if (!isAvaibleGame.rows[0].stockTotal) return res.sendStatus(400);
+
+    const postObject = {
+      ...res.locals.data,
+      stockTotal: isAvaibleGame.rows[0].stockTotal,
+      rentDate: new Date(),
+      returnDate: 0,
+      delayFee: 0,
+    };
+
+    res.sendStatus(201);
+  } catch (error) {
+    res.send(error).status(500);
+  }
 }
 
 export { rentalsPostFinalMiddleware, rentalsPostMiddleware };
