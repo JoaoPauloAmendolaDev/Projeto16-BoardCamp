@@ -1,0 +1,35 @@
+[
+  {
+    "_id": "695736c3-2f0e-4232-910f-e4c0b90c89e8",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:4000/categories",
+    "url": "http://localhost:4000/categories",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-12-07T18:42:14.181Z",
+    "modified": "2022-12-07T18:42:14.181Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "4c3eb31e-a9a1-4b0f-8823-35e12cd727cd",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:4000/categories",
+    "url": "localhost:4000/games",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-12-07T18:44:16.360Z",
+    "modified": "2022-12-08T02:31:32.998Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\" : \"jogo de google\",\n  \"image\" : \"https://files.tecnoblog.net/wp-content/uploads/2021/09/logotipo_da_empresa_google.jpg\",\n  \"stockTotal\" :2,\n  \"categoryId\" : 10,\n  \"pricePerDay\" : 3000\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]
