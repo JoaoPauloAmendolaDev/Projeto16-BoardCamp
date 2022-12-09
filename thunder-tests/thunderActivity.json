@@ -18,16 +18,22 @@
     "colId": "history",
     "containerId": "",
     "name": "localhost:4000/categories",
-    "url": "localhost:4000/rentals",
-    "method": "POST",
+    "url": "localhost:4000/rentals?customerId=3",
+    "method": "GET",
     "sortNum": 0,
     "created": "2022-12-07T18:44:16.360Z",
-    "modified": "2022-12-08T05:13:44.645Z",
+    "modified": "2022-12-09T02:10:34.265Z",
     "headers": [],
-    "params": [],
+    "params": [
+      {
+        "name": "customerId",
+        "value": "3",
+        "isPath": false
+      }
+    ],
     "body": {
       "type": "json",
-      "raw": "{\n  \"customerId\" : 2,\n  \"gameId\" : 2,\n  \"daysRented\" : 3\n}",
+      "raw": "{\n  \"customerId\" : 3,\n  \"gameId\" : 2,\n  \"daysRented\": 5\n}",
       "form": []
     },
     "tests": []
