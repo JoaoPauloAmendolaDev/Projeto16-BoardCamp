@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import rentalsSchema from "../models/rentals.models.js";
 import connection from "../server.js";
 
@@ -252,14 +253,55 @@ async function rentalsPostFinalMiddleware(req, res) {
   }
 }
 
-async function rentalsReturnMiddleware(req, res, next){
-  
+async function rentalsReturnMiddleware(req, res) {
+  let { id } = req.params;
 
+  const gamesRented = await connection.query(
+    "SELECT * FROM rentals WHERE id = $1;",
+    [id]
+  );
 
+  if (!gamesRented.rowCount) return res.sendStatus(404);
+  if (gamesRented.rows[0].returnDate) return res.sendStatus(400);
+
+  res.locals.game = gamesRented.rows[0];
+  gamesRented.rows[0].gameId;
+
+  const today = dayjs();
+  const rentDate = dayjs(gamesRented.rows[0].rentDate);
+  let returnTheGame = rentDate.add(gamesRented.rows[0].daysRented, "day");
+  const daysLate = Math.ceil(today.diff(returnTheGame, "day", true));
+  const fees = 0;
+
+  if (daysLate > 0) fees = daysLate * gamesRented.rows[0].originalPrice;
+
+  await connection.query(
+    'UPDATE rentals SET "returnDate" = $1, "delayFee" = $2 WHERE id = $3',
+    [today, fees, id]
+  );
+
+  return res.sendStatus(200);
+}
+
+async function rentalsDeleteMiddleware(req, res) {
+  const { id } = req.params;
+
+  const rentalToDelete = await connection.query(
+    "SELECT * FROM rentals WHERE id = $1",
+    [id]
+  );
+
+  if (!rentalToDelete.rowCount) return res.send(404);
+  if (!rentalToDelete.rows[0].returnDate) return res.send(400);
+
+  await connection.query("DELETE FROM rentals WHERE id = $1", [id]);
+  res.sendStatus(200)
 }
 
 export {
   rentalsGetMiddleware,
   rentalsPostFinalMiddleware,
   rentalsPostMiddleware,
+  rentalsReturnMiddleware,
+  rentalsDeleteMiddleware,
 };

@@ -1,7 +1,17 @@
 import connection from "../server.js";
 
 async function gamesGetterController(req, res) {
+  const { name } = req.query;
+
   try {
+    if (name) {
+      gameSelected = await connection.query(
+        "SELECT * FROM games WHERE LOWER (name) LIKE LOWER($1) || '%';",
+        [name]
+      );
+      res.send(gameSelected.rows).status(200);
+    }
+
     const listOfGames = await connection.query("SELECT * FROM games");
     return res.send(listOfGames.rows).status(200);
   } catch (error) {

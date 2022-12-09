@@ -41,7 +41,7 @@ async function customerPutMiddleware(req, res, next) {
   }
 
   try {
-    const updateInfoUser = await connection.query(
+    await connection.query(
       "UPDATE customers SET name = $1, phone = $2, cpf = $3, birthday = $4 WHERE id = $5",
       [name, phone, cpf, birthday, id]
     );
